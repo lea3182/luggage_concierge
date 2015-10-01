@@ -21,14 +21,27 @@
 # Handling full lockers?
 # Invalid inputs?
 
+require "awesome_print"
+
 class Hotel
 
   def initialize
     welcome_message
+    @lockers = {}
+    initialize_lockers
   end
  
   def welcome_message
     puts "Welcome to The Leandra Hotel"
+  end
+
+  def initialize_lockers
+    1000.times do |key|
+      @lockers[key] = Locker.new(number: key, capacity: :small)
+      @lockers[key+1000] = Locker.new(number: key+1000, capacity: :medium)
+      @lockers[key+2000] = Locker.new(number: key+2000, capacity: :small)
+    end
+    # ap @lockers
   end
 
   def luggage_system
@@ -74,10 +87,15 @@ end
 
 class Locker
 
-  def initialize
+  def initialize(args)
+    @number = args[:number]
+    @capacity = args[:capacity]
+    @available = true
+    @ticket = nil
   end
 
 end
 
 hotel = Hotel.new
 hotel.luggage_system
+# p a = Locker.new(number: 1, capacity: :small)
