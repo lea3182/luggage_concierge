@@ -25,11 +25,26 @@ class Hotel
 
   def initialize
     welcome_message
-    display_menu
   end
  
   def welcome_message
     puts "Welcome to The Leandra Hotel"
+  end
+
+  def luggage_system
+    until @current_command == 3
+      display_menu
+      case @current_command
+      when 1
+        check_in_luggage
+      when 2
+        check_out_luggage
+      when 3 
+        puts "Goodbye"
+      else
+        puts "Invalid entry. Please try again"
+      end
+    end
   end
     
   def display_menu
@@ -38,9 +53,11 @@ class Hotel
     puts "2) Claim bags"
     puts "3) Exit Application"
     puts
+    @current_command = gets.chomp.to_i
   end
 
   def check_in_luggage
+    puts "checking in?"
   end
 
   def generate_ticket
@@ -50,6 +67,7 @@ class Hotel
   end
 
   def check_out_luggage
+    puts "Checking out?"
   end
 
 end
@@ -62,3 +80,4 @@ class Locker
 end
 
 hotel = Hotel.new
+hotel.luggage_system
