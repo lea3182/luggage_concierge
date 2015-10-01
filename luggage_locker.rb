@@ -1,9 +1,11 @@
-################################################# PROMPT ##################################################
+################################################# PROMPT ##################################################################
 
 # Write a program for managing locker reservations at a hotel concierge desk. Customers leave bags with the concierge, who then uses your program to determine in which locker to place the bag. The program tells the concierge the number of the locker in which to place the bag, and prints a ticket to give to the customer. Upon return, the customer provides the ticket, and the concierge uses that to look up the corresponding locker, retrieve the bag, and return it to the customer.
 # There are 1000 small lockers, 1000 medium sized lockers, and 1000 large lockers (it’s a big Vegas hotel). You can assume that all checked bags fit into one of these three sizes. The program should​ ​always assign the smallest available locker that fits the bag.
 
-###########################################################################################################
+############################################################################################################################
+
+################################################ PSEUDOCODE ################################################################
 
 # user is given a prompt to check in luggage, check out luggage and exit program
 
@@ -19,9 +21,13 @@
 
 # Always assign smallest locker?
 # Handling full lockers?
-# Invalid inputs for luggage program, bag size, ticket                                                                    
+# Invalid inputs for luggage program, bag size, ticket
 
-require "awesome_print"
+############################################################################################################################
+
+# require "awesome_print"
+
+# ASSUMPTIONS : All lockers hold 1 bag. 1 bag per check in.
 
 class Hotel
 
@@ -32,7 +38,9 @@ class Hotel
   end
  
   def welcome_message
-    puts "Welcome to The Leandra Hotel"
+    puts
+    puts "Welcome to the Luggage Concierge 5000"
+    puts
   end
 
   def initialize_lockers
@@ -54,7 +62,7 @@ class Hotel
       when 2
         check_out_prompt
       when 3 
-        puts "Goodbye"
+        puts ""
       else
         puts "Invalid entry. Please try again"
       end
@@ -67,23 +75,22 @@ class Hotel
   end
     
   def display_menu
-
     puts "Please select from the following options:"
     puts "1) Check bags"
     puts "2) Claim bags"
     puts "3) Exit Application"
-    puts
     @current_command = user_input_prompt.to_i
   end
 
   def check_in_prompt
-    puts "Please enter bag size"
-    puts "(small, medium or large)"
+    puts
+    puts "Please enter bag size (small, medium or large):" 
     size = user_input_prompt
     check_in_luggage(size)
   end
 
   def check_luggage_error
+    puts
     puts "Please enter small, medium or large"
     check_in_prompt
   end
@@ -124,28 +131,35 @@ class Hotel
   end
 
   def print_ticket(ticket_number)
-    puts "*" * 80
-    puts "Your ticket is " + ticket_number
-    puts "*" * 80
+    puts  " - " * 15 + "T I C K E T" + " - " * 15
+    puts
+    puts "Please present this ticket to concierge for luggage retrieval "
+    puts "Ticket Number: " + ticket_number
+    puts
+    puts  " - " * 34
   end
   
   def check_out_prompt
+    puts
     puts "Enter the ticket number"
     ticket = user_input_prompt
     check_out_luggage(ticket)
   end
 
   def invalid_ticket_error
+    puts
     puts "Invalid Ticket Number. Please try again."
     check_out_prompt
   end
 
   def check_out_luggage(ticket_number)
     @lockers.each do |locker_number, locker_obj|
-      if locker_obj.ticket == ticket_number
+      if locker_obj.ticket. == ticket_number.downcase
         locker_obj.available = true
         locker_obj.ticket = nil
-        puts "Bag is in locker #{locker_number}"
+        puts
+        puts "Retrieve bag from locker number #{locker_number}"
+        puts
         return 
       end
     end
@@ -168,6 +182,8 @@ end
 
 hotel = Hotel.new
 hotel.luggage_program
+
+# Driver code to test locker availability
 # 1010.times do |i|
 #   puts i
 #   hotel.check_in_luggage("small")
