@@ -24,9 +24,20 @@
 class Hotel
 
   def initialize
+    welcome_message
+    display_menu
   end
-
+ 
+  def welcome_message
+    puts "Welcome to The Leandra Hotel"
+  end
+    
   def display_menu
+    puts "Please select from the following options:"
+    puts "1) Check bags"
+    puts "2) Claim bags"
+    puts "3) Exit Application"
+    puts
   end
 
   def check_in_luggage
@@ -47,5 +58,7 @@ class Locker
 
   def initialize
   end
-  
+
 end
+
+hotel = Hotel.new
