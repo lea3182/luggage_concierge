@@ -39,7 +39,7 @@ class Hotel
     1000.times do |key|
       @lockers[key] = Locker.new(number: key, capacity: :small)
       @lockers[key+1000] = Locker.new(number: key+1000, capacity: :medium)
-      @lockers[key+2000] = Locker.new(number: key+2000, capacity: :small)
+      @lockers[key+2000] = Locker.new(number: key+2000, capacity: :large)
     end
     # ap @lockers
   end
@@ -59,6 +59,11 @@ class Hotel
       end
     end
   end
+
+  def user_input_prompt
+    print ">> "
+    gets.chomp
+  end
     
   def display_menu
     puts "Please select from the following options:"
@@ -66,13 +71,13 @@ class Hotel
     puts "2) Claim bags"
     puts "3) Exit Application"
     puts
-    @current_command = gets.chomp.to_i
+    @current_command = user_input_prompt.to_i
   end
 
   def check_in_luggage
     puts "Please enter bag size"
     puts "(small, medium or large)"
-    bag_size = gets.chomp
+    bag_size = user_input_prompt
     bag_size = bag_size.downcase.to_sym
 
     selected_lockers = @lockers.select {|locker_number, locker_obj| locker_obj.capacity == bag_size}
