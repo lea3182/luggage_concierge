@@ -70,7 +70,19 @@ class Hotel
   end
 
   def check_in_luggage
-    puts "checking in?"
+    puts "Please enter bag size"
+    puts "(small, medium or large)"
+    bag_size = gets.chomp
+    bag_size = bag_size.downcase.to_sym
+
+    selected_lockers = @lockers.select {|locker_number, locker_obj| locker_obj.capacity == bag_size}
+    selected_lockers.each do |locker_number, locker_obj|
+      if locker_obj.available == true
+        locker_obj.available = false
+        ap locker_obj
+        break
+      end
+    end
   end
 
   def generate_ticket
@@ -86,7 +98,8 @@ class Hotel
 end
 
 class Locker
-
+  attr_reader :capacity
+  attr_accessor :available
   def initialize(args)
     @number = args[:number]
     @capacity = args[:capacity]
