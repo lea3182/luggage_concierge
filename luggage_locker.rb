@@ -49,7 +49,7 @@ class Hotel
       display_menu
       case @current_command
       when 1
-        check_in_luggage
+        check_in_prompt
       when 2
         check_out_luggage
       when 3 
@@ -74,26 +74,39 @@ class Hotel
     @current_command = user_input_prompt.to_i
   end
 
-  def check_in_luggage
+  def check_in_prompt
     puts "Please enter bag size"
     puts "(small, medium or large)"
-    bag_size = user_input_prompt
-    bag_size = bag_size.downcase.to_sym
+    size = user_input_prompt
+    check_in_luggage(size)
+  end
 
+  def check_in_luggage(size)
+    bag_size = size.downcase.to_sym
     selected_lockers = @lockers.select {|locker_number, locker_obj| locker_obj.capacity == bag_size}
+
     selected_lockers.each do |locker_number, locker_obj|
       if locker_obj.available == true
         locker_obj.available = false
-        ap locker_obj
-        break
+        locker_obj.ticket = generate_ticket
+        # ap locker_obj
+        return print_ticket(locker_obj.ticket)
       end
     end
   end
 
   def generate_ticket
+    characters = [('a'..'z'), ('1'..'20')].map { |i| i.to_a }.flatten
+    ticket_number = Array.new(5) { characters.sample }.join.to_s
   end
 
-  def print_ticket
+  def print_ticket(ticket_number)
+    puts "*" * 80
+    puts "Your ticket is " + ticket_number
+    puts "*" * 80
+  end
+  
+  def check_out_prompt
   end
 
   def check_out_luggage
@@ -104,7 +117,7 @@ end
 
 class Locker
   attr_reader :capacity
-  attr_accessor :available
+  attr_accessor :available, :ticket
   def initialize(args)
     @number = args[:number]
     @capacity = args[:capacity]
