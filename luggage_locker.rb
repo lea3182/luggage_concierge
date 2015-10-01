@@ -4,3 +4,48 @@
 # There are 1000 small lockers, 1000 medium sized lockers, and 1000 large lockers (it’s a big Vegas hotel). You can assume that all checked bags fit into one of these three sizes. The program should​ ​always assign the smallest available locker that fits the bag.
 
 ###########################################################################################################
+
+# user is given a prompt to check in luggage, check out luggage and exit program
+
+# hotel has 1000 small, 1000 medium and 1000 large lockers
+# hotel needs to check in luggage
+# hotel needs to provide a ticket with each checked piece of luggage
+# hotel needs to check out luggage based on ticket number
+
+# locker has a locker number
+# locker has a capacity (small, medium, large)
+# locker has an availability value
+# locker has a ticket number associated
+
+# Always assign smallest locker?
+# Handling full lockers?
+# Invalid inputs?
+
+class Hotel
+
+  def initialize
+  end
+
+  def display_menu
+  end
+
+  def check_in_luggage
+  end
+
+  def generate_ticket
+  end
+
+  def print_ticket
+  end
+
+  def check_out_luggage
+  end
+
+end
+
+class Locker
+
+  def initialize
+  end
+  
+end
