@@ -9,15 +9,15 @@
 
 # user is given a prompt to check in luggage, check out luggage and exit program
 
-# hotel has 1000 small, 1000 medium and 1000 large lockers                        
-# hotel needs to check in luggage                                                 
-# hotel needs to provide a ticket with each checked piece of luggage              
-# hotel needs to check out luggage based on ticket number                         
+# hotel has 1000 small, 1000 medium and 1000 large lockers
+# hotel needs to check in luggage
+# hotel needs to provide a ticket with each checked piece of luggage
+# hotel needs to check out luggage based on ticket number
 
-# locker has a locker number                                                      
-# locker has a capacity (small, medium, large)                                    
-# locker has an availability value                                                
-# locker has a ticket number associated                                           
+# locker has a locker number
+# locker has a capacity (small, medium, large)
+# locker has an availability value
+# locker has a ticket number associated
 
 # Always assign smallest locker?
 # Handling full lockers?
@@ -36,7 +36,7 @@ class Hotel
     @lockers = {}
     initialize_lockers
   end
- 
+
   def welcome_message
     puts
     puts "Welcome to the Luggage Concierge 5000"
@@ -61,7 +61,7 @@ class Hotel
         check_in_prompt
       when 2
         check_out_prompt
-      when 3 
+      when 3
         puts ""
       else
         puts "Invalid entry. Please try again"
@@ -73,7 +73,7 @@ class Hotel
     print ">> "
     gets.chomp
   end
-    
+
   def display_menu
     puts "Please select from the following options:"
     puts "1) Check bags"
@@ -84,7 +84,7 @@ class Hotel
 
   def check_in_prompt
     puts
-    puts "Please enter bag size (small, medium or large):" 
+    puts "Please enter bag size (small, medium or large):"
     size = user_input_prompt
     check_in_luggage(size)
   end
@@ -98,9 +98,9 @@ class Hotel
   def check_in_luggage(size)
     bag_size = size.downcase.to_sym
     selected_lockers = @lockers.select {|locker_number, locker_obj| locker_obj.capacity == bag_size}
-   
+
     return check_luggage_error if bag_size != :small && bag_size != :medium && bag_size != :large
-  
+
     selected_lockers.each do |locker_number, locker_obj|
       if locker_obj.available == true
         locker_obj.available = false
@@ -138,7 +138,7 @@ class Hotel
     puts
     puts  " - " * 34
   end
-  
+
   def check_out_prompt
     puts
     puts "Enter the ticket number"
@@ -160,7 +160,7 @@ class Hotel
         puts
         puts "Retrieve bag from locker number #{locker_number}"
         puts
-        return 
+        return
       end
     end
     invalid_ticket_error
@@ -196,3 +196,4 @@ hotel.luggage_program
 #   puts i
 #   hotel.check_in_luggage("large")
 # end
+##
